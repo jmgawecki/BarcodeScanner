@@ -15,6 +15,7 @@ struct ProductDetail: View {
     var body: some View {
         ZStack {
             VStack {
+                Spacer()
                 (image ?? Image(systemName: "cross"))
                     .resizable()
                     .frame(width: 250, height: 250, alignment: .center)
@@ -22,10 +23,16 @@ struct ProductDetail: View {
                 Text(item?.products[0].productName ?? "No product's name available")
                     .font(.headline)
                     .padding(.vertical)
-//                    .frame(width: 250, height: 30, alignment: .leading)
                 Text(item?.products[0].category ?? "No product's category available")
                     .font(.subheadline)
                 Text(item?.products[0].brand ?? "Product's brand unknown")
+                
+                Button(action: {
+                    
+                }, label: {
+                    Text("Add to favorite")
+                        .padding()
+                })
                 Spacer(minLength: 170)
             }
         }

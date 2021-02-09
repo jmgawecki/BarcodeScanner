@@ -44,11 +44,31 @@ struct BarcodeScannerView: View {
                 
                 CodeDisplayer(scannedCode: $viewModel.scannedCode)
                     .padding()
+                HStack {
+                    Button(action: {
+                        print("tralalal")
+                    }, label: {
+                        Text("Get info!")
+                            .padding()
+                            .frame(width: 150, height: 50, alignment: .center)
+                            .background(Color.green)
+                            .cornerRadius(15)
+                    })
+                    Button(action: {
+                    }, label: {
+                        Text("Favorites")
+                            .padding()
+                            .frame(width: 150, height: 50, alignment: .center)
+                            .background(Color.yellow)
+                            .cornerRadius(15)
+                    })
+                }
             }
             
             .navigationTitle("Barcode Scanner")
             .sheet(isPresented: $viewModel.isShowingDetail, content: {
                 ProductDetail(item: $viewModel.selectedProduct, image: $viewModel.productImage)
+                
             })
             
             

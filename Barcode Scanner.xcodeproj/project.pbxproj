@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2034A85587294E52B031D4C1 /* ProductStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AEA0C4D89745B49E00D284 /* ProductStored.swift */; };
 		6D03BC79C25988A87056F069 /* Pods_Barcode_Scanner__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5C811FCECA340B4B3707E8 /* Pods_Barcode_Scanner__macOS_.framework */; };
+		71CE3A3F060641E0B814684E /* ProductStored+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */; };
+		A925795B1A7F4189AF55A816 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */; };
 		DF11B732C4B841F6A4834B0F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DC9934037684554A742F948 /* amplifyconfiguration.json */; };
 		EF7D599A25CEEAD900B690D3 /* Barcode_ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D598725CEEAD900B690D3 /* Barcode_ScannerApp.swift */; };
 		EF7D599B25CEEAD900B690D3 /* Barcode_ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D598725CEEAD900B690D3 /* Barcode_ScannerApp.swift */; };
@@ -31,9 +34,6 @@
 		EFF49CBA25D1CAA000DE6631 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF49CB825D1CAA000DE6631 /* Item.swift */; };
 		F5193439E4D4438C9DFEB01B /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CF25145C78CC46DAAC931EEA /* awsconfiguration.json */; };
 		F77F2D4006577F2F37C5E382 /* Pods_Barcode_Scanner__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3EC541E932D99664E6B337 /* Pods_Barcode_Scanner__iOS_.framework */; };
-		A925795B1A7F4189AF55A816 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */; };
-		2034A85587294E52B031D4C1 /* ProductStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AEA0C4D89745B49E00D284 /* ProductStored.swift */; };
-		71CE3A3F060641E0B814684E /* ProductStored+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +42,9 @@
 		406E495F7F6C4BAC8BA80EA1 /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
 		488CC8E00F3506FFAB43E0D8 /* Pods-Barcode Scanner (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barcode Scanner (macOS).release.xcconfig"; path = "Target Support Files/Pods-Barcode Scanner (macOS)/Pods-Barcode Scanner (macOS).release.xcconfig"; sourceTree = "<group>"; };
 		5DC9934037684554A742F948 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		64AEA0C4D89745B49E00D284 /* ProductStored.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = ProductStored.swift; path = amplify/generated/models/ProductStored.swift; sourceTree = "<group>"; };
+		6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
+		7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "ProductStored+Schema.swift"; path = "amplify/generated/models/ProductStored+Schema.swift"; sourceTree = "<group>"; };
 		8BDA1AFAC556A5C833D0BFBD /* Pods-Barcode Scanner (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barcode Scanner (macOS).debug.xcconfig"; path = "Target Support Files/Pods-Barcode Scanner (macOS)/Pods-Barcode Scanner (macOS).debug.xcconfig"; sourceTree = "<group>"; };
 		9D3EC541E932D99664E6B337 /* Pods_Barcode_Scanner__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barcode_Scanner__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF25145C78CC46DAAC931EEA /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -62,9 +65,6 @@
 		EFF49CB025D1CA5E00DE6631 /* ScanError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanError.swift; sourceTree = "<group>"; };
 		EFF49CB825D1CAA000DE6631 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		F690F0E5997DB3E6F39E3E51 /* Pods-Barcode Scanner (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barcode Scanner (iOS).debug.xcconfig"; path = "Target Support Files/Pods-Barcode Scanner (iOS)/Pods-Barcode Scanner (iOS).debug.xcconfig"; sourceTree = "<group>"; };
-		6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */ = {isa = PBXFileReference; name = "AmplifyModels.swift"; path = "amplify/generated/models/AmplifyModels.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		64AEA0C4D89745B49E00D284 /* ProductStored.swift */ = {isa = PBXFileReference; name = "ProductStored.swift"; path = "amplify/generated/models/ProductStored.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */ = {isa = PBXFileReference; name = "ProductStored+Schema.swift"; path = "amplify/generated/models/ProductStored+Schema.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +87,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8515E48A10C54784A420863D /* AmplifyModels */ = {
+			isa = PBXGroup;
+			children = (
+				6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */,
+				64AEA0C4D89745B49E00D284 /* ProductStored.swift */,
+				7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */,
+			);
+			name = AmplifyModels;
+			path = .;
+			sourceTree = "<group>";
+		};
 		B822AB050C2BA8E0D39D87A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +188,7 @@
 		EF7D59AC25CEF27F00B690D3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EF8A915625D34AD900BBE791 /* FavoriteProductsView */,
 				EF800D1F25D2C57E00767EFF /* ProductDetailView */,
 				EF800D1E25D2C56D00767EFF /* BarcodeScannerView */,
 			);
@@ -206,6 +218,13 @@
 				EFF49CA225D1C85800DE6631 /* ProductDetail.swift */,
 			);
 			path = ProductDetailView;
+			sourceTree = "<group>";
+		};
+		EF8A915625D34AD900BBE791 /* FavoriteProductsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FavoriteProductsView;
 			sourceTree = "<group>";
 		};
 		EFF49C9E25D1AC8200DE6631 /* Views */ = {
@@ -246,25 +265,6 @@
 				EFF49CB825D1CAA000DE6631 /* Item.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		8515E48A10C54784A420863D /* AmplifyModels */ = {
-			isa = PBXGroup;
-			children = (
-				6F5E22FFCB0843AEB962A71C /* AmplifyModels.swift */,
-				64AEA0C4D89745B49E00D284 /* ProductStored.swift */,
-				7C80B86E5EC545098FCD32B2 /* ProductStored+Schema.swift */,
-			);
-			name = AmplifyModels;
-			path = .;
-			sourceTree = "<group>";
-		};
-		C11FE0F0E2F349839E7C10D7 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			path = undefined;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
