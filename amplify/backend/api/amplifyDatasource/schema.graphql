@@ -1,0 +1,8 @@
+type ProductStored @model {
+  id: ID!
+  barcode: String!
+  productName: String
+  category: String
+  brand: String
+  image: String
+}

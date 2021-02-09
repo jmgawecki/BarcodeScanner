@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-barcodescanner-dev-210657-authRole",
+      "UnauthRoleArn": "arn:aws:iam::294253628179:role/amplify-barcodescanner-dev-210657-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::294253628179:role/amplify-barcodescanner-dev-210657-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-barcodescanner-dev-210657-deployment",
+      "UnauthRoleName": "amplify-barcodescanner-dev-210657-unauthRole",
+      "StackName": "amplify-barcodescanner-dev-210657",
+      "StackId": "arn:aws:cloudformation:eu-west-2:294253628179:stack/amplify-barcodescanner-dev-210657/bf7e4fa0-6b1a-11eb-a7c6-061de1ed6718",
+      "AmplifyAppId": "dsatbxta0ccnk"
+    }
+  }
+}
