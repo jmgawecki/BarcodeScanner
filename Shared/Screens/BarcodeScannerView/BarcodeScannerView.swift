@@ -56,12 +56,26 @@ struct BarcodeScannerView: View {
                     
                 }
                 .navigationTitle("Barcode Scanner")
-                .sheet(isPresented: $viewModel.didRequestProductInfo, content: {
-                    ProductDetail(item: $viewModel.selectedProduct,
-                                  image: $viewModel.productImage,
-                                  productToBeAdded: $viewModel.productToBeAdded,
-                                  addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
-                })
+                .sheet(item: $viewModel.activeSheet) { item in
+                    switch item {
+                    case .detail:
+                        ProductDetail(item: $viewModel.selectedProduct,
+                                      image: $viewModel.productImage,
+                                      productToBeAdded: $viewModel.productToBeAdded,
+                                      addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
+                    case .create:
+                        CreateProductView(viewModel: viewModel,
+                                          addedCreatedToFavorite: $viewModel.addedCreatedToFavorite,
+                                          productToBeCreated: $viewModel.productToBeCreated,
+                                          barcode: $viewModel.scannedCode)
+                    }
+                }
+//                .sheet(isPresented: $viewModel.didRequestProductInfo, content: {
+//                    ProductDetail(item: $viewModel.selectedProduct,
+//                                  image: $viewModel.productImage,
+//                                  productToBeAdded: $viewModel.productToBeAdded,
+//                                  addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
+//                })
             }
             .tabItem {
                 Text("First Tab")
