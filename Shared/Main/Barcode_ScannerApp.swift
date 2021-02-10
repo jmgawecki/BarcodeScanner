@@ -19,7 +19,7 @@ struct Barcode_ScannerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            BarcodeScannerView()
+            ScannerView()
         }
     }
 }

@@ -17,30 +17,40 @@ enum ActiveSheet: Identifiable {
     }
 }
 
+struct AlertItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let message: String
+    let dismiss: Alert.Button
+}
+
+struct AlertContext {
+    static let invalidDeviceInput = AlertItem(title: "Invalid Device Input",
+                                              message: "test",
+                                              dismiss: .default(Text("Ok")))
+    static let invalidScanType = AlertItem(title: "Invalid ScanType",
+                                              message: "test",
+                                              dismiss: .default(Text("Ok")))
+}
+
 final class ScannerViewModel: ObservableObject {
     
     
     //MARK: - Declarations
+    var selectedProduct: ProductLocal?
     
-    @Published var productToBeCreated: ProductStored?
-    @Published var productToBeAdded: ProductStored?
-    
-    @Published var activeSheet: ActiveSheet?
-    
-    @Published var favoriteProducts: [ProductStored] = []
-    
-    @Published var selectedFavorite: ProductStored? {
+    @Published var productToBeCreated:  ProductStored?
+    @Published var productToBeAdded:    ProductStored?
+    @Published var selectedFavorite:    ProductStored? {
         didSet {
             isShowingFavDetail = true
             getFavProductsImage(from: (selectedFavorite?.image)!)
         }
     }
+    @Published var favoriteProducts:    [ProductStored] = []
     
-    var selectedProduct: ProductLocal?
-//    { didSet { isShowingDetail = true } }
-    
-//    @Published var isShowingCreateProduct = false
-    
+    @Published var activeSheet: ActiveSheet?
+
     @Published var scannedCode = ""
     
     @Published var didRequestProductInfo = false {

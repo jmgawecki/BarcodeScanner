@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScannerView: UIViewControllerRepresentable {
+struct ScannerViewAV: UIViewControllerRepresentable {
     
     @Binding var scannedCode: String
     @Binding var alertItem: AlertItem?
@@ -34,10 +34,10 @@ struct ScannerView: UIViewControllerRepresentable {
     final class Coordinator: NSObject, ScannerVCDelegate {
         
         /// That is for creating a connection between our Coordinator and out scannerView
-        private let scannerView: ScannerView
+        private let scannerView: ScannerViewAV
         
         /// normal uikit initialising
-        init(scannerView: ScannerView) { self.scannerView = scannerView }
+        init(scannerView: ScannerViewAV) { self.scannerView = scannerView }
         
         /// this is binding to our ScannerView's struct scannedCode,
         /// that is passed onto ScannerView where UI changes are executed
