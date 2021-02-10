@@ -31,50 +31,49 @@ struct BarcodeScannerView: View {
     
     
     var body: some View {
-        NavigationView {
-            VStack {
-                ScannerView(scannedCode: $viewModel.scannedCode,
-                            alertItem: $viewModel.alertItem)
-                    .frame(maxWidth: .infinity, maxHeight: 300)
-                
-                Spacer().frame(height: 60)
-                
-                Label("Scanned Barcode:", systemImage: "barcode.viewfinder")
-                    .font(.title)
-                
-                CodeDisplayer(scannedCode: $viewModel.scannedCode)
-                    .padding()
-                HStack {
-                    Button(action: {
-                        print("tralalal")
-                    }, label: {
-                        Text("Get info!")
-                            .padding()
-                            .frame(width: 150, height: 50, alignment: .center)
-                            .background(Color.green)
-                            .cornerRadius(15)
-                    })
-                    Button(action: {
-                    }, label: {
-                        Text("Favorites")
-                            .padding()
-                            .frame(width: 150, height: 50, alignment: .center)
-                            .background(Color.yellow)
-                            .cornerRadius(15)
-                    })
+        TabView {
+            NavigationView {
+                VStack {
+                    ScannerView(scannedCode: $viewModel.scannedCode,
+                                alertItem: $viewModel.alertItem)
+                        .frame(maxWidth: .infinity, maxHeight: 300)
+                    
+                    Spacer().frame(height: 60)
+                    
+                    ScannedCodeLabel()
+                    
+                    CodeDisplayer(scannedCode: $viewModel.scannedCode)
+                    
+                    if !viewModel.scannedCode.isEmpty {
+                        GetInfoButton(didRequestProductInfo: $viewModel.didRequestProductInfo,
+                                      scannedCode: $viewModel.scannedCode)
+                    } else {
+                        GetInfoButton(didRequestProductInfo: $viewModel.didRequestProductInfo,
+                                      scannedCode: $viewModel.scannedCode).hidden()
+                    }
+                    
+                    
+                    
+                }
+                .navigationTitle("Barcode Scanner")
+                .sheet(isPresented: $viewModel.isShowingDetail, content: {
+                    ProductDetail(item: $viewModel.selectedProduct, image: $viewModel.productImage)
+                })
+            }
+            .tabItem {
+                Text("First Tab")
+                Image(systemName: "phone.fill")
+            }
+            NavigationView {
+                VStack {
+                    
                 }
             }
-            
-            .navigationTitle("Barcode Scanner")
-            .sheet(isPresented: $viewModel.isShowingDetail, content: {
-                ProductDetail(item: $viewModel.selectedProduct, image: $viewModel.productImage)
-                
-            })
-            
-            
+            .tabItem {
+                Text("Second tab")
+                Image(systemName: "phone.fill")
+            }
         }
-        
-        
     }
 }
     
@@ -92,5 +91,30 @@ struct CodeDisplayer: View {
             .font(.title)
             .fontWeight(.bold)
             .foregroundColor(scannedCode.isEmpty ? Color(.red) : Color(.green))
+            .padding()
+    }
+}
+
+struct ScannedCodeLabel: View {
+    var body: some View {
+        Label("Scanned Barcode:", systemImage: "barcode.viewfinder")
+            .font(.title)
+    }
+}
+
+struct GetInfoButton: View {
+    @Binding var didRequestProductInfo: Bool
+    @Binding var scannedCode: String
+    var body: some View {
+        Button(action: {
+            didRequestProductInfo.toggle()
+        }, label: {
+            Text("Get info!")
+                .padding()
+                .frame(width: 150, height: 50, alignment: .center)
+                .background(Color.green)
+                .cornerRadius(15)
+            
+        })
     }
 }

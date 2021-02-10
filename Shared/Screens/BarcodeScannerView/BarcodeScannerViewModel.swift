@@ -13,7 +13,9 @@ final class BarcodeScannerViewModel: ObservableObject {
         didSet { isShowingDetail = true }
     }
     
-    @Published var scannedCode = "" {
+    @Published var scannedCode = ""
+    
+    @Published var didRequestProductInfo = false {
         didSet {
             if !scannedCode.isEmpty { getProductInfo() }
         }
@@ -50,4 +52,5 @@ final class BarcodeScannerViewModel: ObservableObject {
             }
         }
     }
+    
 }
