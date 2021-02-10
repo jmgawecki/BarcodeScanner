@@ -8,7 +8,6 @@
 import Foundation
 
 struct Item: Codable {
-//    var id = UUID()
     var products: [Product]
 }
 
@@ -21,14 +20,20 @@ struct Product: Codable {
 }
 
 struct MockData {
-    static let sample = Item(products: sample2)
-    
-    static let sample2: [Product] = [
-    Product(barcodeNumber: "2345345354",
+    static let sample: ProductLocal =
+    ProductLocal(barcodeNumber: "2345345354",
             productName: "Haroun and the Sea of Stories",
             category: "Media > Books > Print Books",
             brand: "Penguin Books",
-            images: ["https://images.barcodelookup.com/134/1342375-1.jpg"])
-    ]
+            image: "https://images.barcodelookup.com/134/1342375-1.jpg")
+    
+}
+
+struct ProductLocal {
+    let barcodeNumber:  String
+    var productName:    String?
+    var category:       String?
+    var brand:          String?
+    var image:          String?
 }
 

@@ -9,16 +9,14 @@ import SwiftUI
 
 final class BarcodeScannerViewModel: ObservableObject {
     
-    var selectedProduct: Item? {
-        didSet { isShowingDetail = true }
-    }
+    @Published var favoriteProducts: [ProductLocal]?
+    
+    var selectedProduct: ProductLocal? { didSet { isShowingDetail = true } }
     
     @Published var scannedCode = ""
     
     @Published var didRequestProductInfo = false {
-        didSet {
-            if !scannedCode.isEmpty { getProductInfo() }
-        }
+        didSet { if !scannedCode.isEmpty { getProductInfo() } }
     }
     
     @Published var productImage: Image?
@@ -36,8 +34,7 @@ final class BarcodeScannerViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.selectedProduct = product
                 }
-                print(product)
-                self.getProductsImage(from: product.products[0].images![0])
+                self.getProductsImage(from: product.image!)
             case .failure(let error):
                 print(error)
             }

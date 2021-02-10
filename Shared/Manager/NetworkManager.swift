@@ -13,7 +13,7 @@ class NetworkManager {
     
     private init() {}
     
-    func getProduct(barcode: String, completed: @escaping(Result<Item,ScanError>) -> Void) {
+    func getProduct(barcode: String, completed: @escaping(Result<ProductLocal,ScanError>) -> Void) {
         let urlString = "https://api.barcodelookup.com/v2/products?barcode=\(barcode)&formatted=y&key=fuuyc2efcj8b2w0jjp08n8xx76arm7"
         
         guard let url = URL(string: urlString) else {
@@ -38,8 +38,12 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let product = try decoder.decode(Item.self, from: data)
-                print(product)
-                completed(.success(product))
+                let localProduct = ProductLocal(barcodeNumber: product.products[0].barcodeNumber,
+                                                productName: product.products[0].productName,
+                                                category: product.products[0].category,
+                                                brand: product.products[0].brand,
+                                                image: product.products[0].images?[0])
+                completed(.success(localProduct))
                 
             } catch {
                 completed(.failure(.chatchError))

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductDetail: View {
     
-    @Binding var item: Item?
+    @Binding var item: ProductLocal?
     @Binding var image: Image?
     
     var body: some View {
@@ -20,12 +20,14 @@ struct ProductDetail: View {
                     .resizable()
                     .frame(width: 250, height: 250, alignment: .center)
                 
-                Text(item?.products[0].productName ?? "No product's name available")
+                Text(item?.productName ?? "No product's name available")
                     .font(.headline)
                     .padding(.vertical)
-                Text(item?.products[0].category ?? "No product's category available")
+                
+                Text(item?.category ?? "No product's category available")
                     .font(.subheadline)
-                Text(item?.products[0].brand ?? "Product's brand unknown")
+                
+                Text(item?.brand ?? "Product's brand unknown")
                 
                 Button(action: {
                     
