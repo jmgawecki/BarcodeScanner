@@ -21,7 +21,7 @@ struct ScannerView: View {
             NavigationView {
                 VStack {
                     ScannerViewAV(scannedCode: $viewModel.scannedCode,
-                                alertItem: $viewModel.alertItem)
+                                  alertItem: $viewModel.alertItem)
                         .frame(maxWidth: .infinity, maxHeight: 300)
                     
                     Spacer().frame(height: 60)
@@ -32,14 +32,11 @@ struct ScannerView: View {
                     
                     if !viewModel.scannedCode.isEmpty {
                         GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
-                                      scannedCode: $viewModel.scannedCode)
+                                                scannedCode: $viewModel.scannedCode)
                     } else {
                         GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
-                                      scannedCode: $viewModel.scannedCode).hidden()
+                                                scannedCode: $viewModel.scannedCode).hidden()
                     }
-                    
-                    
-                    
                 }
                 .navigationTitle("Barcode Scanner")
                 .sheet(item: $viewModel.activeSheet) { item in
@@ -48,22 +45,18 @@ struct ScannerView: View {
                         ProductDetail(selectedProduct: $viewModel.selectedProduct,
                                       image: $viewModel.productImage,
                                       fetchedProductFromJson: $viewModel.fetchedProductFromJson)
+                        
                     case .create:
                         CreateProductView(createdProductManually: $viewModel.createdProductManually,
                                           barcode: $viewModel.scannedCode)
                     }
                 }
-//                .sheet(isPresented: $viewModel.didRequestProductInfo, content: {
-//                    ProductDetail(item: $viewModel.selectedProduct,
-//                                  image: $viewModel.productImage,
-//                                  productToBeFetched: $viewModel.productToBeFetched,
-//                                  addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
-//                })
             }
             .tabItem {
                 Text("First Tab")
                 Image(systemName: "phone.fill")
             }
+            
             NavigationView {
                 VStack {
                     List {
@@ -92,17 +85,23 @@ struct ScannerView: View {
                 Text("Second tab")
                 Image(systemName: "phone.fill")
             }
-            
         }
     }
 }
-    
+
+
+// MARK:- Preview
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ScannerView()
     }
 }
+
+
+// MARK: - Custom Views
+
 
 struct CodeDisplayer: View {
     @Binding var scannedCode: String

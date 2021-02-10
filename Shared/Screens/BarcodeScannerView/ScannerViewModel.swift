@@ -36,7 +36,7 @@ struct AlertContext {
 final class ScannerViewModel: ObservableObject {
     
     
-    //MARK: - Declarations
+    //MARK: - Main Logic UI Publishers
     var selectedProduct: ProductStored?
     
     @Published var favoriteProducts:    [ProductStored] = []
@@ -59,7 +59,7 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
-    
+ 
     /// That publisher will present FavProductDetail.swift and execute downloading the product's image from Json
     @Published var selectedFavorite:    ProductStored? {
         didSet {
@@ -68,23 +68,17 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
-    @Published var productImage: Image?
-    
-    
     @Published var isShowingFavDetail = false
-    
-    
-    /// That publisher gives a value to one of the cases from ActiveSheet enumeration. Based on a result from getProductInfo() network call, will present either CreateProductView.swift (case failure) or ProductDetail.swift (case success).
-    @Published var activeSheet: ActiveSheet?
     
     
     /// That publisher execute getProductInfo() network call when button GetProductDetailsButton(...) is tapped in ScannerView.swift.
     @Published var didRequestProductFromJson = false {
         didSet { if !scannedCode.isEmpty { getProductInfo() } }
     }
-
     
-    @Published var scannedCode = ""
+    
+    // MARK: - Image related Publishers
+    
     
     @Published var didCloseFavProductDetail = false {
         didSet {
@@ -92,18 +86,24 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
+    @Published var productImage: Image?
     
     
-//    @Published var favProductImage: Image?
+    @Published var scannedCode = ""
+    
+    
+    // MARK: - Conditional Publishers
+    
     
     @Published var alertItem: AlertItem?
     
-    func getImage() {
-        
-    }
     
+    /// That publisher gives a value to one of the cases from ActiveSheet enumeration. Based on a result from getProductInfo() network call, will present either CreateProductView.swift (case failure) or ProductDetail.swift (case success).
+    @Published var activeSheet: ActiveSheet?
+
     
     //MARK: - Data Store Functions
+    
     
     /// Loads products from AWS Amplify Data Store. Saves products to local array favoriteProducts
     func loadProducts() {
@@ -137,6 +137,7 @@ final class ScannerViewModel: ObservableObject {
     
     //MARK: - Network Calls
     
+    
     private func getProductInfo() {
         NetworkManager.shared.getProduct(barcode: scannedCode) { [weak self] (result) in
             guard let self = self else { return }
@@ -160,6 +161,7 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
+    
     private func getProductImage(from urlString: String) {
         NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
             guard let self = self else { return }
@@ -168,14 +170,4 @@ final class ScannerViewModel: ObservableObject {
             }
         }
     }
-    
-//    private func getFavProductsImage(from urlString: String) {
-//        NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                self.favProductImage = image
-//            }
-//        }
-//    }
-    
 }
