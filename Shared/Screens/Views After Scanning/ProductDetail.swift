@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductDetail: View {
     
-    @Binding var item: ProductLocal?
+    @Binding var selectedProduct: ProductStored?
     @Binding var image: Image?
     @Binding var fetchedProductFromJson: ProductStored?
     
@@ -21,21 +21,22 @@ struct ProductDetail: View {
                     .resizable()
                     .frame(width: 250, height: 250, alignment: .center)
                 
-                Text(item?.productName ?? "No product's name available")
+                let extractedExpr: Text = Text(selectedProduct?.productName ?? "No product's name available")
+                extractedExpr
                     .font(.headline)
                     .padding(.vertical)
                 
-                Text(item?.category ?? "No product's category available")
+                Text(selectedProduct?.category ?? "No product's category available")
                     .font(.subheadline)
                 
-                Text(item?.brand ?? "Product's brand unknown")
+                Text(selectedProduct?.brand ?? "Product's brand unknown")
                 
                 Button(action: {
-                    fetchedProductFromJson = ProductStored(barcode: item!.barcodeNumber,
-                                                     productName: item?.productName,
-                                                     category: item?.category,
-                                                     brand: item?.brand,
-                                                     image: item?.image)
+                    fetchedProductFromJson = ProductStored(barcode: selectedProduct!.barcode,
+                                                     productName: selectedProduct?.productName,
+                                                     category: selectedProduct?.category,
+                                                     brand: selectedProduct?.brand,
+                                                     image: selectedProduct?.image)
                 }, label: {
                     Text("Add to favorite")
                         .padding()

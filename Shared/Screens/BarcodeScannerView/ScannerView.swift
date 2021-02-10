@@ -31,10 +31,10 @@ struct ScannerView: View {
                     CodeDisplayer(scannedCode: $viewModel.scannedCode)
                     
                     if !viewModel.scannedCode.isEmpty {
-                        GetInfoButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
+                        GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
                                       scannedCode: $viewModel.scannedCode)
                     } else {
-                        GetInfoButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
+                        GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
                                       scannedCode: $viewModel.scannedCode).hidden()
                     }
                     
@@ -45,7 +45,7 @@ struct ScannerView: View {
                 .sheet(item: $viewModel.activeSheet) { item in
                     switch item {
                     case .detail:
-                        ProductDetail(item: $viewModel.selectedProduct,
+                        ProductDetail(selectedProduct: $viewModel.selectedProduct,
                                       image: $viewModel.productImage,
                                       fetchedProductFromJson: $viewModel.fetchedProductFromJson)
                     case .create:
@@ -120,7 +120,7 @@ struct ScannedCodeLabel: View {
     }
 }
 
-struct GetInfoButton: View {
+struct GetProductDetailsButton: View {
     @Binding var didRequestProductFromJson: Bool
     @Binding var scannedCode: String
     var body: some View {

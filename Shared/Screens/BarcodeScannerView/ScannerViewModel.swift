@@ -37,8 +37,12 @@ final class ScannerViewModel: ObservableObject {
     
     
     //MARK: - Declarations
-    var selectedProduct: ProductLocal?
+    var selectedProduct: ProductStored?
     
+    @Published var favoriteProducts:    [ProductStored] = []
+    
+    
+    /// That publisher fires the function that will save newly created product in CreateProductView.swift to Amplify Data Store. Object will be saved to local array favoriteProducts. Publisher will dismiss CreateProductView.swift
     @Published var createdProductManually:  ProductStored? {
         didSet {
             createNSaveProductFromStored(from: createdProductManually!)
@@ -46,6 +50,8 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
+    
+    /// That publisher fires the function that will save newly fetched product from Json in ProductDetail.swift to Amplify Data Store. Object will be saved to local array favoriteProducts. Publisher will dismiss ProductDetail.swift
     @Published var fetchedProductFromJson:  ProductStored? {
         didSet {
             createNSaveProductFromStored(from: fetchedProductFromJson!)
@@ -53,6 +59,8 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
+    
+    /// That publisher will present FavProductDetail.swift and execute downloading the product's image from Json
     @Published var selectedFavorite:    ProductStored? {
         didSet {
             isShowingFavDetail = true
@@ -60,20 +68,25 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
-    @Published var favoriteProducts:    [ProductStored] = []
     
+    @Published var isShowingFavDetail = false
+    
+    
+    /// That publisher gives a value to one of the cases from ActiveSheet enumeration. Based on a result from getProductInfo() network call, will present either CreateProductView.swift (case failure) or ProductDetail.swift (case success).
     @Published var activeSheet: ActiveSheet?
-
-    @Published var scannedCode = ""
     
+    
+    /// That publisher execute getProductInfo() network call when button GetProductDetailsButton(...) is tapped in ScannerView.swift.
     @Published var didRequestProductFromJson = false {
         didSet { if !scannedCode.isEmpty { getProductInfo() } }
     }
+
+    
+    @Published var scannedCode = ""
     
     @Published var productImage: Image?
-    @Published var favProductImage: Image?
     
-    @Published var isShowingFavDetail = false
+    @Published var favProductImage: Image?
     
     @Published var alertItem: AlertItem?
     
@@ -96,23 +109,7 @@ final class ScannerViewModel: ObservableObject {
             }
         }
     }
-    
-    func createNSaveProductFromLocal(from product: ProductLocal) {
-        let productStored = ProductStored(barcode: product.barcodeNumber,
-                                          productName: product.productName,
-                                          category: product.category,
-                                          brand: product.brand,
-                                          image: product.image)
-        favoriteProducts.append(productStored)
-        Amplify.DataStore.save(productStored) { (result) in
-            switch result {
-            case .success(let item):
-                print("SUCCESS! \n Saved \(item)")
-            case .failure(let error):
-                print("Error in createNSaveProducts: \(error)")
-            }
-        }
-    }
+
     
     func createNSaveProductFromStored(from product: ProductStored) {
         favoriteProducts.append(product)
@@ -135,16 +132,18 @@ final class ScannerViewModel: ObservableObject {
             switch result {
             case .success(let product):
                 DispatchQueue.main.async {
-                    self.selectedProduct = product
+                    self.selectedProduct = ProductStored(barcode: product.barcodeNumber,
+                                                         productName: product.productName,
+                                                         category: product.category,
+                                                         brand: product.brand,
+                                                         image: product.image)
                     self.activeSheet = .detail
                 }
-                self.getProductsImage(from: product.image!)
+                self.getProductsImage(from: (self.selectedProduct?.image)!)
             case .failure(let error):
-//                self.isShowingCreateProduct.toggle()
                 DispatchQueue.main.async {
                     self.activeSheet = .create
                 }
-               
                 print(error)
             }
         }
