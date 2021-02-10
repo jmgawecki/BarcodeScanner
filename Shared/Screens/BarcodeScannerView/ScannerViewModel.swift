@@ -45,7 +45,7 @@ final class ScannerViewModel: ObservableObject {
     /// That publisher fires the function that will save newly created product in CreateProductView.swift to Amplify Data Store. Object will be saved to local array favoriteProducts. Publisher will dismiss CreateProductView.swift
     @Published var createdProductManually:  ProductStored? {
         didSet {
-            createNSaveProductFromStored(from: createdProductManually!)
+            uploadProductToCloud(from: createdProductManually!)
             activeSheet = nil
         }
     }
@@ -54,7 +54,7 @@ final class ScannerViewModel: ObservableObject {
     /// That publisher fires the function that will save newly fetched product from Json in ProductDetail.swift to Amplify Data Store. Object will be saved to local array favoriteProducts. Publisher will dismiss ProductDetail.swift
     @Published var fetchedProductFromJson:  ProductStored? {
         didSet {
-            createNSaveProductFromStored(from: fetchedProductFromJson!)
+            uploadProductToCloud(from: fetchedProductFromJson!)
             activeSheet = nil
         }
     }
@@ -64,9 +64,11 @@ final class ScannerViewModel: ObservableObject {
     @Published var selectedFavorite:    ProductStored? {
         didSet {
             isShowingFavDetail = true
-            getFavProductsImage(from: (selectedFavorite?.image)!)
+            getProductImage(from: (selectedFavorite?.image)!)
         }
     }
+    
+    @Published var productImage: Image?
     
     
     @Published var isShowingFavDetail = false
@@ -84,9 +86,15 @@ final class ScannerViewModel: ObservableObject {
     
     @Published var scannedCode = ""
     
-    @Published var productImage: Image?
+    @Published var didCloseFavProductDetail = false {
+        didSet {
+            productImage = nil
+        }
+    }
     
-    @Published var favProductImage: Image?
+    
+    
+//    @Published var favProductImage: Image?
     
     @Published var alertItem: AlertItem?
     
@@ -97,6 +105,7 @@ final class ScannerViewModel: ObservableObject {
     
     //MARK: - Data Store Functions
     
+    /// Loads products from AWS Amplify Data Store. Saves products to local array favoriteProducts
     func loadProducts() {
         Amplify.DataStore.query(ProductStored.self) { [weak self] (result) in
             guard let self = self else { return }
@@ -111,7 +120,9 @@ final class ScannerViewModel: ObservableObject {
     }
 
     
-    func createNSaveProductFromStored(from product: ProductStored) {
+    /// Uploads single product to AWS Amplify Data Store
+    /// - Parameter product: product that is going to be uploaded in AWS Amplify Data Store
+    func uploadProductToCloud(from product: ProductStored) {
         favoriteProducts.append(product)
         Amplify.DataStore.save(product) { (result) in
             switch result {
@@ -139,7 +150,7 @@ final class ScannerViewModel: ObservableObject {
                                                          image: product.image)
                     self.activeSheet = .detail
                 }
-                self.getProductsImage(from: (self.selectedProduct?.image)!)
+                self.getProductImage(from: (self.selectedProduct?.image)!)
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.activeSheet = .create
@@ -149,7 +160,7 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
-    private func getProductsImage(from urlString: String) {
+    private func getProductImage(from urlString: String) {
         NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -158,13 +169,13 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
-    private func getFavProductsImage(from urlString: String) {
-        NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.favProductImage = image
-            }
-        }
-    }
+//    private func getFavProductsImage(from urlString: String) {
+//        NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                self.favProductImage = image
+//            }
+//        }
+//    }
     
 }

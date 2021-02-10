@@ -13,6 +13,7 @@ struct FavProductDetail: View {
     
     @Binding var item: ProductStored?
     @Binding var image: Image?
+    @Binding var didCloseFavProductDetail: Bool
     
     var body: some View {
         ZStack {
@@ -32,6 +33,9 @@ struct FavProductDetail: View {
                 Text(item?.brand ?? "Product's brand unknown")
                 Spacer(minLength: 170)
             }
+        }
+        .onDisappear {
+            didCloseFavProductDetail.toggle()
         }
     }
 }

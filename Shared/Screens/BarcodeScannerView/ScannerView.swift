@@ -83,7 +83,9 @@ struct ScannerView: View {
                     .onAppear { viewModel.loadProducts() }
                 }
                 .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
-                    FavProductDetail(item: $viewModel.selectedFavorite, image: $viewModel.favProductImage)
+                    FavProductDetail(item: $viewModel.selectedFavorite,
+                                     image: $viewModel.productImage,
+                                     didCloseFavProductDetail: $viewModel.didCloseFavProductDetail)
                 })
             }
             .tabItem {
