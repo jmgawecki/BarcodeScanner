@@ -27,6 +27,14 @@ struct MockData {
             brand: "Penguin Books",
             image: "https://images.barcodelookup.com/134/1342375-1.jpg")
     
+    static let sample2: ProductStored =
+    ProductStored(barcode: "2345345354",
+            productName: "Haroun and the Sea of Stories",
+            category: "Media > Books > Print Books",
+            brand: "Penguin Books",
+            image: "https://images.barcodelookup.com/134/1342375-1.jpg")
+    
+    
 }
 
 struct ProductLocal {

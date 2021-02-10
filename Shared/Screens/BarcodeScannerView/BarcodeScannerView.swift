@@ -26,7 +26,7 @@ struct AlertContext {
 struct BarcodeScannerView: View {
     /// We are going to bind it in our ScannerView initialising moment.
     
-    @StateObject private var viewModel = BarcodeScannerViewModel()
+    @StateObject private var viewModel = ScannerViewModel()
     
     
     
@@ -56,8 +56,11 @@ struct BarcodeScannerView: View {
                     
                 }
                 .navigationTitle("Barcode Scanner")
-                .sheet(isPresented: $viewModel.isShowingDetail, content: {
-                    ProductDetail(item: $viewModel.selectedProduct, image: $viewModel.productImage)
+                .sheet(isPresented: $viewModel.didRequestProductInfo, content: {
+                    ProductDetail(item: $viewModel.selectedProduct,
+                                  image: $viewModel.productImage,
+                                  productToBeAdded: $viewModel.productToBeAdded,
+                                  addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
                 })
             }
             .tabItem {
@@ -66,13 +69,31 @@ struct BarcodeScannerView: View {
             }
             NavigationView {
                 VStack {
-                    
+                    List {
+                        Group {
+                            if viewModel.favoriteProducts.isEmpty {
+                                Text("No favorites")
+                            } else {
+                                ForEach(viewModel.favoriteProducts, id: \.id) { product in
+                                    ProductRowView(productItem: product)
+                                        .onTapGesture {
+                                            viewModel.selectedFavorite = product
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    .onAppear { viewModel.loadProducts() }
                 }
+                .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
+                    FavProductDetail(item: $viewModel.selectedFavorite, image: $viewModel.favProductImage)
+                })
             }
             .tabItem {
                 Text("Second tab")
                 Image(systemName: "phone.fill")
             }
+            
         }
     }
 }

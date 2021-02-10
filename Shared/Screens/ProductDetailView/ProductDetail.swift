@@ -11,6 +11,8 @@ struct ProductDetail: View {
     
     @Binding var item: ProductLocal?
     @Binding var image: Image?
+    @Binding var productToBeAdded: ProductStored?
+    @Binding var addedFetchedToFavorite: Bool
     
     var body: some View {
         ZStack {
@@ -30,7 +32,13 @@ struct ProductDetail: View {
                 Text(item?.brand ?? "Product's brand unknown")
                 
                 Button(action: {
-                    
+                    productToBeAdded = ProductStored(barcode: item!.barcodeNumber,
+                                                     productName: item?.productName,
+                                                     category: item?.category,
+                                                     brand: item?.brand,
+                                                     image: item?.image)
+                    addedFetchedToFavorite.toggle()
+                    print(addedFetchedToFavorite)
                 }, label: {
                     Text("Add to favorite")
                         .padding()
@@ -41,8 +49,8 @@ struct ProductDetail: View {
     }
 }
 
-struct ProductDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductDetail(item: .constant(MockData.sample), image: .constant(Image("mockupImage")))
-    }
-}
+//struct ProductDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProductDetail(item: .constant(MockData.sample), image: .constant(Image("mockupImage")))
+//    }
+//}

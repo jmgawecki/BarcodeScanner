@@ -40,7 +40,7 @@ struct ScannerView: UIViewControllerRepresentable {
         init(scannerView: ScannerView) { self.scannerView = scannerView }
         
         /// this is binding to our ScannerView's struct scannedCode,
-        /// that is passed onto BarcodeScannerView where UI changes are executed
+        /// that is passed onto ScannerView where UI changes are executed
         func didFind(barcode: String) {
             scannerView.scannedCode = barcode
         }
