@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct CreateProductView: View {
-    @ObservedObject var viewModel: ScannerViewModel
-    @Binding var addedCreatedToFavorite: Bool
-    @Binding var productToBeCreated: ProductStored?
+    @Binding var createdProductManually: ProductStored?
     
     @Binding var barcode: String
     @State var productName: String = ""
@@ -48,12 +46,11 @@ struct CreateProductView: View {
                         productName = "Test1"
                     }
                     #warning("Later on you can check and refactor for productToBeCreated to didSet instead of addedToFavorite.toggle")
-                    productToBeCreated = ProductStored(barcode: barcode,
+                    createdProductManually = ProductStored(barcode: barcode,
                                                        productName: productName,
                                                        category: category,
                                                        brand: brand,
                                                        image: image)
-                    addedCreatedToFavorite.toggle()
                     
                 }, label: {
                     Text("Add to favorite!")

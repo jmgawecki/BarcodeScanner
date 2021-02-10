@@ -39,38 +39,39 @@ final class ScannerViewModel: ObservableObject {
     //MARK: - Declarations
     var selectedProduct: ProductLocal?
     
-    @Published var productToBeCreated:  ProductStored?
-    @Published var productToBeAdded:    ProductStored?
+    @Published var createdProductManually:  ProductStored? {
+        didSet {
+            createNSaveProductFromStored(from: createdProductManually!)
+            activeSheet = nil
+        }
+    }
+    
+    @Published var fetchedProductFromJson:  ProductStored? {
+        didSet {
+            createNSaveProductFromStored(from: fetchedProductFromJson!)
+            activeSheet = nil
+        }
+    }
+    
     @Published var selectedFavorite:    ProductStored? {
         didSet {
             isShowingFavDetail = true
             getFavProductsImage(from: (selectedFavorite?.image)!)
         }
     }
+    
     @Published var favoriteProducts:    [ProductStored] = []
     
     @Published var activeSheet: ActiveSheet?
 
     @Published var scannedCode = ""
     
-    @Published var didRequestProductInfo = false {
+    @Published var didRequestProductFromJson = false {
         didSet { if !scannedCode.isEmpty { getProductInfo() } }
     }
     
     @Published var productImage: Image?
     @Published var favProductImage: Image?
-    @Published var addedCreatedToFavorite = false {
-        didSet {
-            createNSaveProductFromStored(from: productToBeCreated!)
-            activeSheet = nil
-        }
-    }
-    @Published var addedFetchedToFavorite = false {
-        didSet {
-            createNSaveProductFromStored(from: productToBeAdded!)
-            activeSheet = nil
-        }
-    }
     
     @Published var isShowingFavDetail = false
     

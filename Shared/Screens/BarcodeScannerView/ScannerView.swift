@@ -31,10 +31,10 @@ struct ScannerView: View {
                     CodeDisplayer(scannedCode: $viewModel.scannedCode)
                     
                     if !viewModel.scannedCode.isEmpty {
-                        GetInfoButton(didRequestProductInfo: $viewModel.didRequestProductInfo,
+                        GetInfoButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
                                       scannedCode: $viewModel.scannedCode)
                     } else {
-                        GetInfoButton(didRequestProductInfo: $viewModel.didRequestProductInfo,
+                        GetInfoButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
                                       scannedCode: $viewModel.scannedCode).hidden()
                     }
                     
@@ -47,19 +47,16 @@ struct ScannerView: View {
                     case .detail:
                         ProductDetail(item: $viewModel.selectedProduct,
                                       image: $viewModel.productImage,
-                                      productToBeAdded: $viewModel.productToBeAdded,
-                                      addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
+                                      fetchedProductFromJson: $viewModel.fetchedProductFromJson)
                     case .create:
-                        CreateProductView(viewModel: viewModel,
-                                          addedCreatedToFavorite: $viewModel.addedCreatedToFavorite,
-                                          productToBeCreated: $viewModel.productToBeCreated,
+                        CreateProductView(createdProductManually: $viewModel.createdProductManually,
                                           barcode: $viewModel.scannedCode)
                     }
                 }
 //                .sheet(isPresented: $viewModel.didRequestProductInfo, content: {
 //                    ProductDetail(item: $viewModel.selectedProduct,
 //                                  image: $viewModel.productImage,
-//                                  productToBeAdded: $viewModel.productToBeAdded,
+//                                  productToBeFetched: $viewModel.productToBeFetched,
 //                                  addedFetchedToFavorite: $viewModel.addedFetchedToFavorite)
 //                })
             }
@@ -124,11 +121,11 @@ struct ScannedCodeLabel: View {
 }
 
 struct GetInfoButton: View {
-    @Binding var didRequestProductInfo: Bool
+    @Binding var didRequestProductFromJson: Bool
     @Binding var scannedCode: String
     var body: some View {
         Button(action: {
-            didRequestProductInfo.toggle()
+            didRequestProductFromJson.toggle()
         }, label: {
             Text("Get info!")
                 .padding()
