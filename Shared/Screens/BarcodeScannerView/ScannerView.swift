@@ -10,11 +10,7 @@ import SwiftUI
 
 
 struct ScannerView: View {
-    /// We are going to bind it in our ScannerView initialising moment.
-    
     @StateObject private var viewModel = ScannerViewModel()
-    
-    
     
     var body: some View {
         TabView {
@@ -23,19 +19,20 @@ struct ScannerView: View {
                     ScannerViewAV(scannedCode: $viewModel.scannedCode,
                                   alertItem: $viewModel.alertItem)
                         .frame(maxWidth: .infinity, maxHeight: 300)
+                        .cornerRadius(75)
                     
-                    Spacer().frame(height: 60)
+                    Spacer().frame(minHeight: 30, maxHeight: 100)
                     
                     ScannedCodeLabel()
                     
                     CodeDisplayer(scannedCode: $viewModel.scannedCode)
                     
-                    if !viewModel.scannedCode.isEmpty {
+                    if viewModel.isButtonVisible {
                         GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
-                                                scannedCode: $viewModel.scannedCode)
+                                                scannedCode: $viewModel.scannedCode, isButtonVisible: $viewModel.isButtonVisible)
                     } else {
                         GetProductDetailsButton(didRequestProductFromJson: $viewModel.didRequestProductFromJson,
-                                                scannedCode: $viewModel.scannedCode).hidden()
+                                                scannedCode: $viewModel.scannedCode, isButtonVisible: $viewModel.isButtonVisible).hidden()
                     }
                 }
                 .navigationTitle("Barcode Scanner")
@@ -96,6 +93,7 @@ struct ScannerView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ScannerView()
+            .preferredColorScheme(.dark)
     }
 }
 
@@ -106,11 +104,12 @@ struct ContentView_Previews: PreviewProvider {
 struct CodeDisplayer: View {
     @Binding var scannedCode: String
     var body: some View {
-        Text(scannedCode.isEmpty ? "NOT YET SCANNED" : scannedCode)
+        Text(scannedCode.isEmpty ? "Not scanned yet" : scannedCode)
             .font(.title)
             .fontWeight(.bold)
-            .foregroundColor(scannedCode.isEmpty ? Color(.red) : Color(.green))
-            .padding()
+            .foregroundColor(scannedCode.isEmpty ? Color(.systemPink) : Color(.systemGreen))
+            .padding(.bottom)
+           
     }
 }
 
@@ -124,16 +123,18 @@ struct ScannedCodeLabel: View {
 struct GetProductDetailsButton: View {
     @Binding var didRequestProductFromJson: Bool
     @Binding var scannedCode: String
+    @Binding var isButtonVisible: Bool
     var body: some View {
         Button(action: {
             didRequestProductFromJson.toggle()
+            isButtonVisible.toggle()
         }, label: {
             Text("Get info!")
-                .padding()
                 .frame(width: 150, height: 50, alignment: .center)
                 .background(Color.green)
                 .cornerRadius(15)
             
         })
+        .padding(.bottom)
     }
 }

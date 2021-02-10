@@ -89,7 +89,15 @@ final class ScannerViewModel: ObservableObject {
     @Published var productImage: Image?
     
     
-    @Published var scannedCode = ""
+    @Published var scannedCode = "" {
+        didSet {
+            withAnimation {
+                isButtonVisible.toggle()
+            }
+        }
+    }
+    
+    @Published var isButtonVisible = false
     
     
     // MARK: - Conditional Publishers
