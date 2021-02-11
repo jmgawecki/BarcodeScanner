@@ -17,19 +17,19 @@ struct ProductDetail: View {
         ZStack {
             VStack {
                 Spacer()
-                (image ?? Image(systemName: "cross"))
-                    .resizable()
-                    .frame(width: 250, height: 250, alignment: .center)
                 
-                let extractedExpr: Text = Text(selectedProduct?.productName ?? "No product's name available")
-                extractedExpr
-                    .font(.headline)
-                    .padding(.vertical)
+                BarcodeLabel(item: $selectedProduct)
                 
-                Text(selectedProduct?.category ?? "No product's category available")
-                    .font(.subheadline)
+                ProductDetailImageView(image: $image)
                 
-                Text(selectedProduct?.brand ?? "Product's brand unknown")
+                ProductLabel(item: $selectedProduct,
+                             systemImageString: SystemImages.productsName)
+                
+                ProductBrandLabel(item: $selectedProduct)
+                
+                ProductLabel(item: $selectedProduct,
+                             systemImageString: SystemImages.productsCategory)
+                
                 
                 Button(action: {
                     fetchedProductFromJson = ProductStored(barcode: selectedProduct!.barcode,
@@ -40,15 +40,34 @@ struct ProductDetail: View {
                 }, label: {
                     Text("Add to favorite")
                         .padding()
+                        .foregroundColor(.green)
+                       
                 })
-                Spacer(minLength: 170)
+                Spacer().frame(minHeight: 10, maxHeight: 80)
             }
         }
     }
 }
 
-//struct ProductDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProductDetail(item: .constant(MockData.sample), image: .constant(Image("mockupImage")))
-//    }
-//}
+struct ProductDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        ProductDetail(selectedProduct: .constant(MockData.sample2),
+                      image: .constant(Image("mockupImage")),
+                      fetchedProductFromJson: .constant(MockData.sample2))
+            .preferredColorScheme(.dark)
+    }
+}
+
+/*
+ BarcodeLabel(item: $item)
+ 
+ ProductDetailImageView(image: $image)
+ 
+ ProductLabel(item: $item, systemImageString: SystemImages.productsName)
+ 
+ ProductBrandLabel(item: $item)
+ 
+ ProductLabel(item: $item, systemImageString: SystemImages.productsCategory)
+
+ Spacer(minLength: 30)*/
+

@@ -19,29 +19,46 @@ struct FavProductDetail: View {
         ZStack {
             VStack {
                 Spacer()
-                (image ?? Image(systemName: "cross"))
-                    .resizable()
-                    .frame(width: 250, height: 250, alignment: .center)
                 
-                Text(item?.productName ?? "No product's name available")
-                    .font(.headline)
-                    .padding(.vertical)
+                BarcodeLabel(item: $item)
                 
-                Text(item?.category ?? "No product's category available")
-                    .font(.subheadline)
+                ProductDetailImageView(image: $image)
                 
-                Text(item?.brand ?? "Product's brand unknown")
-                Spacer(minLength: 170)
+                ProductLabel(item: $item, systemImageString: SystemImages.productsName)
+                
+                ProductBrandLabel(item: $item)
+                
+                ProductLabel(item: $item, systemImageString: SystemImages.productsCategory)
+               
+                Spacer(minLength: 30)
             }
         }
         .onDisappear {
             didCloseFavProductDetail.toggle()
+            image = nil
         }
     }
 }
 
-//struct FavProductDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProductDetail(item: .constant(MockData.sample), image: .constant(Image("mockupImage")))
-//    }
-//}
+
+//MARK: - Preview
+
+
+struct FavProductDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        FavProductDetail(item: .constant(MockData.sample2),
+                         image: .constant(Image("mockupImage")),
+                         didCloseFavProductDetail: .constant(false))
+            .preferredColorScheme(.dark)
+    }
+}
+
+
+//MARK: - Views
+
+
+
+
+
+
+
