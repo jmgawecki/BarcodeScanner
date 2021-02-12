@@ -67,10 +67,11 @@ struct ScannerView: View {
                                             viewModel.selectedFavorite = product
                                         }
                                 }
+                                .onDelete(perform: viewModel.deleteProduct(at:))
                             }
                         }
                     }
-                    .onAppear { viewModel.loadProducts() }
+                    .onAppear { viewModel.reloadProducts() }
                 }
                 .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
                     FavProductDetail(item: $viewModel.selectedFavorite,

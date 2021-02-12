@@ -11,8 +11,14 @@ struct BarcodeLabel: View {
     @Binding var item: ProductStored?
     
     var body: some View {
-        Label(item?.barcode ?? "No barcode available", systemImage: "barcode.viewfinder")
-            .foregroundColor(.green)
-            .font(.title)
+        if ((item?.productName?.isEmpty) != nil) {
+            Label((item?.barcode)!, systemImage: "barcode.viewfinder")
+                .foregroundColor(.green)
+                .font(.title)
+        } else {
+            Label("No barcode available", systemImage: "barcode.viewfinder")
+                .foregroundColor(.green)
+                .font(.title)
+        }
     }
 }

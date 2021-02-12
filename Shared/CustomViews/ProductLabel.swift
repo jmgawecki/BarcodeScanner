@@ -13,10 +13,18 @@ struct ProductLabel: View {
     
     var body: some View {
         HStack {
-            Label(item?.productName ?? "No product's name available",
-                  systemImage: systemImageString ?? "xcross")
-                .font(.headline)
-                .padding()
+            if ((item?.productName?.isEmpty) != nil) {
+                Label((item?.productName)!,
+                      systemImage: systemImageString ?? "xcross")
+                    .font(.headline)
+                    .padding()
+            } else {
+                Label("No product's name available",
+                      systemImage: systemImageString ?? "xcross")
+                    .font(.headline)
+                    .padding()
+            }
+            
             Spacer()
         }
     }

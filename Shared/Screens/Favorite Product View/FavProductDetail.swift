@@ -37,6 +37,9 @@ struct FavProductDetail: View {
             didCloseFavProductDetail.toggle()
             image = nil
         }
+        .onAppear {
+            print(item)
+        }
     }
 }
 

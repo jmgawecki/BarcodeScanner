@@ -17,3 +17,4 @@ struct ProductDetailImageView: View {
             .cornerRadius(50)
     }
 }
+

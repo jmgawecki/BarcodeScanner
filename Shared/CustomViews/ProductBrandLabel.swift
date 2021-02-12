@@ -11,12 +11,19 @@ struct ProductBrandLabel: View {
     @Binding var item: ProductStored?
     
     var body: some View {
+        
         HStack {
-            Label(" \(item?.brand ?? "No product's brand available")", systemImage: "building")
-                .font(.headline)
-                .padding()
-            Spacer()
-            
+            if ((item?.brand!) != "") {
+                Label(" \((item?.brand)!)", systemImage: "building")
+                    .font(.headline)
+                    .padding()
+                Spacer()
+            } else {
+                Label(" No product's brand available", systemImage: "building")
+                    .font(.headline)
+                    .padding()
+                Spacer()
+            }
         }
     }
 }

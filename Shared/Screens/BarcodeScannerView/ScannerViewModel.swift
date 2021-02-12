@@ -8,6 +8,7 @@
 import SwiftUI
 import Amplify
 import AmplifyPlugins
+import UIKit
 
 enum ActiveSheet: Identifiable {
     case detail, create
@@ -37,7 +38,15 @@ final class ScannerViewModel: ObservableObject {
     
     
     //MARK: - Main Logic UI Publishers
-    var selectedProduct: ProductStored?
+    var selectedProduct:    ProductStored?
+    
+    var foundProduct:       ProductStored? {
+        didSet {
+            
+        }
+    }
+    
+    var foundProductImage: Image?
     
     @Published var favoriteProducts:    [ProductStored] = []
     
@@ -73,7 +82,12 @@ final class ScannerViewModel: ObservableObject {
     
     /// That publisher execute getProductInfo() network call when button GetProductDetailsButton(...) is tapped in ScannerView.swift.
     @Published var didRequestProductFromJson = false {
-        didSet { if !scannedCode.isEmpty { getProductInfo() } }
+        didSet {
+            if !scannedCode.isEmpty { getProductInfo()
+                
+            }
+            
+        }
     }
     
     
@@ -111,10 +125,21 @@ final class ScannerViewModel: ObservableObject {
 
     
     //MARK: - Data Store Functions
-    
+    func findProductInCloud(searchedProduct: ProductStored) {
+        Amplify.DataStore.query(ProductStored.self) { (result) in
+            switch result {
+            case .success(let products):
+                var tempProducts: [ProductStored]?
+                tempProducts = products.filter({ $0.barcode == searchedProduct.barcode})
+                self.foundProduct = tempProducts?[0]
+            case .failure(let error):
+                print("Error in loadProducts: \(error)")
+            }
+        }
+    }
     
     /// Loads products from AWS Amplify Data Store. Saves products to local array favoriteProducts
-    func loadProducts() {
+    func reloadProducts() {
         Amplify.DataStore.query(ProductStored.self) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -143,6 +168,34 @@ final class ScannerViewModel: ObservableObject {
     }
     
     
+    func deleteProduct(at offsets: IndexSet, from productsfavList: inout [ProductStored]) {
+        for index in offsets {
+            let product = productsfavList[index]
+            deleteFromCloud(product: product)
+        }
+        favoriteProducts.remove(atOffsets: offsets)
+    }
+    
+    
+    func deleteFromCloud(product: ProductStored) {
+        Amplify.DataStore.delete(product) { result in
+            switch result {
+            case .success():
+                print("product with the id: \(product.id) deleted!")
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
+            }
+        }
+    }
+    
+    func deleteProduct(at offsets: IndexSet) {
+      deleteProduct(at: offsets, from: &favoriteProducts)
+    }
+    
+    
+    
+    
+    
     //MARK: - Network Calls
     
     
@@ -159,7 +212,7 @@ final class ScannerViewModel: ObservableObject {
                                                          image: product.image)
                     self.activeSheet = .detail
                 }
-                self.getProductImage(from: (self.selectedProduct?.image)!)
+                self.getProductImage(from: (product.image)!)
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.activeSheet = .create
