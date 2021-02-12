@@ -10,4 +10,6 @@ Technology used:
 - Integration with AWS Amplify, Data Store
 - Barcode APIs
 
+The project stores some sensitive data, therefore source code can be shared upon request:)
+
 Development in progress. Will update video presenting the app shortly:)
