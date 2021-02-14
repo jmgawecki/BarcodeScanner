@@ -15,7 +15,6 @@ enum CameraError {
     case invalidScannedValue
 }
 
-
 /// Protocol for communication with the main View
 protocol ScannerVCDelegate: class {
     func didFind(barcode: String)
