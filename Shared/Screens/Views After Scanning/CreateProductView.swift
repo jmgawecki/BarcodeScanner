@@ -41,12 +41,15 @@ struct CreateProductView: View {
                         TextField("", text: $barcode).disabled(true)
                             .foregroundColor(.gray)
                     }
+                    
                     Section(header: Text("Name")) {
                         TextField("", text: $productName)
                     }
+                    
                     Section(header: Text("Brand")) {
                         TextField("", text: $brand)
                     }
+                    
                     Section(header: Text("Category")) {
                         TextField("", text: $category)
                     }

@@ -39,14 +39,8 @@ final class ScannerViewModel: ObservableObject {
     
     //MARK: - Main Logic UI Publishers
     var selectedProduct:    ProductStored?
+    var didFoundProductInCloud = false
     
-    var foundProduct:       ProductStored? {
-        didSet {
-            
-        }
-    }
-    
-    var foundProductImage: Image?
     
     @Published var favoriteProducts:    [ProductStored] = []
     
@@ -83,10 +77,8 @@ final class ScannerViewModel: ObservableObject {
     /// That publisher execute getProductInfo() network call when button GetProductDetailsButton(...) is tapped in ScannerView.swift.
     @Published var didRequestProductFromJson = false {
         didSet {
-            if !scannedCode.isEmpty { getProductInfo()
-                
+            if !scannedCode.isEmpty { findProductInCloud()
             }
-            
         }
     }
     
@@ -125,18 +117,31 @@ final class ScannerViewModel: ObservableObject {
 
     
     //MARK: - Data Store Functions
-    func findProductInCloud(searchedProduct: ProductStored) {
+    func findProductInCloud() {
         Amplify.DataStore.query(ProductStored.self) { (result) in
             switch result {
             case .success(let products):
                 var tempProducts: [ProductStored]?
-                tempProducts = products.filter({ $0.barcode == searchedProduct.barcode})
-                self.foundProduct = tempProducts?[0]
+                tempProducts = products.filter({ $0.barcode == scannedCode})
+                print(tempProducts)
+                guard ((tempProducts?.isEmpty) == nil) else {
+                    DispatchQueue.main.async {
+                        self.selectedProduct = tempProducts?[0]
+                        self.activeSheet = .detail
+                    }
+                    self.getProductImage(from: (tempProducts![0].image)!)
+                    return
+                }
+                
+                getProductInfo()
+                
+                
             case .failure(let error):
                 print("Error in loadProducts: \(error)")
             }
         }
     }
+    
     
     /// Loads products from AWS Amplify Data Store. Saves products to local array favoriteProducts
     func reloadProducts() {
@@ -223,8 +228,10 @@ final class ScannerViewModel: ObservableObject {
     }
     
     
-    private func getProductImage(from urlString: String) {
-        NetworkManager.shared.downloadImage(with: urlString) { [weak self] (image) in
+    private func getProductImage(from urlString: String?) {
+        guard urlString != nil else { return }
+        
+        NetworkManager.shared.downloadImage(with: urlString!) { [weak self] (image) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.productImage = image

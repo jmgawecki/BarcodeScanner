@@ -7,7 +7,6 @@
 
 import SwiftUI
 import UIKit
-/// Camera Framework
 import AVFoundation
 
 enum CameraError {
