@@ -125,17 +125,18 @@ final class ScannerViewModel: ObservableObject {
             case .success(let products):
                 var tempProducts: [ProductStored]?
                 tempProducts = products.filter({ $0.barcode == scannedCode})
-                guard ((tempProducts?.isEmpty) == nil) else {
+                if ((tempProducts?.isEmpty) == false) {
                     DispatchQueue.main.async {
                         self.selectedProduct = tempProducts?[0]
                         self.activeSheet = .detail
                     }
-                    self.getProductImage(from: (tempProducts![0].image)!)
+                    self.getProductImage(from: (tempProducts?[0].image))
                     didScanFromCloud = true
-                    return
+                } else {
+                    getProductInfo()
                 }
                 
-                getProductInfo()
+                
                 
                 
             case .failure(let error):

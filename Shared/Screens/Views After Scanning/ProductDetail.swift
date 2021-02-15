@@ -34,9 +34,11 @@ struct ProductDetail: View {
                 if didScanFromCloud == false {
                     AddToFavoriteButton(fetchedProductFromJson: $fetchedProductFromJson,
                                         selectedProduct: $selectedProduct)
+                } else {
+                    Spacer().frame(minHeight: 10, maxHeight: 80) 
                 }
                 
-                Spacer().frame(minHeight: 10, maxHeight: 80)
+                
             }
         }
         .onDisappear {

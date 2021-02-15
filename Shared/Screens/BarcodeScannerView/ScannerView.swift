@@ -13,7 +13,40 @@ struct ScannerView: View {
     @StateObject private var viewModel = ScannerViewModel()
     
     var body: some View {
+  
         TabView {
+            NavigationView {
+            List {
+                if viewModel.favoriteProducts.isEmpty {
+                    EmptyStateList()
+                } else {
+                    ForEach(viewModel.favoriteProducts, id: \.id) { product in
+                        ProductRowView(productItem: product)
+                            .onTapGesture {
+                                viewModel.selectedFavorite = product
+                            }
+                    }
+                    .onDelete(perform: { indexSet in
+                        viewModel.deleteProduct(at: indexSet)
+                        viewModel.reloadProducts()
+                    })
+                }
+            }
+            .listStyle(InsetGroupedListStyle())
+            .onAppear { viewModel.reloadProducts() }
+            .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
+                FavProductDetail(selectedProduct: $viewModel.selectedFavorite,
+                                 image: $viewModel.productImage,
+                                 didCloseFavProductDetail: $viewModel.didCloseFavProductDetail)
+            })
+            
+            .navigationTitle("Your products")
+            
+        }
+            .tabItem {
+                Text("Your products")
+                Image(systemName: "star")
+            }
             NavigationView {
                 VStack {
                     ScannerViewAV(scannedCode: $viewModel.scannedCode,
@@ -35,7 +68,7 @@ struct ScannerView: View {
                                                 scannedCode: $viewModel.scannedCode, isButtonVisible: $viewModel.isButtonVisible).hidden()
                     }
                 }
-                .navigationTitle("Barcode Scanner")
+                .navigationTitle("Scanner")
                 .sheet(item: $viewModel.activeSheet) { item in
                     switch item {
                     case .detail:
@@ -50,45 +83,15 @@ struct ScannerView: View {
                 }
             }
             .tabItem {
-                Text("First Tab")
-                Image(systemName: "phone.fill")
+                Text("Scanner")
+                Image(systemName: "barcode.viewfinder")
             }
             
-            NavigationView {
-                VStack {
-                    List {
-                        Group {
-                            if viewModel.favoriteProducts.isEmpty {
-                                Text("No favorites")
-                            } else {
-                                ForEach(viewModel.favoriteProducts, id: \.id) { product in
-                                    ProductRowView(productItem: product)
-                                        .onTapGesture {
-                                            viewModel.selectedFavorite = product
-                                        }
-                                }
-                                .onDelete(perform: { indexSet in
-                                    viewModel.deleteProduct(at: indexSet)
-                                    viewModel.reloadProducts()
-                                })
-                            }
-                        }
-                    }
-                    .onAppear { viewModel.reloadProducts() }
-                }
-                .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
-                    FavProductDetail(selectedProduct: $viewModel.selectedFavorite,
-                                     image: $viewModel.productImage,
-                                     didCloseFavProductDetail: $viewModel.didCloseFavProductDetail)
-                })
-            }
-            .tabItem {
-                Text("Second tab")
-                Image(systemName: "phone.fill")
-            }
+            
         }
     }
 }
+
 
 
 // MARK:- Preview
@@ -97,7 +100,10 @@ struct ScannerView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ScannerView()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
+            
+            
+            
     }
 }
 
@@ -113,7 +119,7 @@ struct CodeDisplayer: View {
             .fontWeight(.bold)
             .foregroundColor(scannedCode.isEmpty ? Color(.systemPink) : Color(.systemGreen))
             .padding(.bottom)
-           
+        
     }
 }
 
@@ -140,5 +146,15 @@ struct GetProductDetailsButton: View {
             
         })
         .padding(.bottom)
+    }
+}
+
+struct EmptyStateList: View {
+    var body: some View {
+        Text("No favorites")
+            .frame(maxWidth: .infinity, idealHeight: 60, maxHeight: 60)
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(15)
+            .padding()
     }
 }
