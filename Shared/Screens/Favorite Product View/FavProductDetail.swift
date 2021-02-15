@@ -11,7 +11,7 @@ import SwiftUI
 
 struct FavProductDetail: View {
     
-    @Binding var item: ProductStored?
+    @Binding var selectedProduct: ProductStored?
     @Binding var image: Image?
     @Binding var didCloseFavProductDetail: Bool
     
@@ -20,15 +20,15 @@ struct FavProductDetail: View {
             VStack {
                 Spacer()
                 
-                BarcodeLabel(item: $item)
+                BarcodeLabel(item: $selectedProduct)
                 
                 ProductDetailImageView(image: $image)
                 
-                ProductLabel(item: $item, systemImageString: SystemImages.productsName)
+                ProductNameLabel(item: $selectedProduct, systemImageString: SystemImages.productsName)
                 
-                ProductBrandLabel(item: $item)
+                ProductBrandLabel(item: $selectedProduct)
                 
-                ProductLabel(item: $item, systemImageString: SystemImages.productsCategory)
+                ProductCategoryLabel(item: $selectedProduct, systemImageString: SystemImages.productsCategory)
                
                 Spacer(minLength: 30)
             }
@@ -38,7 +38,7 @@ struct FavProductDetail: View {
             image = nil
         }
         .onAppear {
-            print(item)
+            print(selectedProduct)
         }
     }
 }
@@ -49,7 +49,7 @@ struct FavProductDetail: View {
 
 struct FavProductDetail_Previews: PreviewProvider {
     static var previews: some View {
-        FavProductDetail(item: .constant(MockData.sample2),
+        FavProductDetail(selectedProduct: .constant(MockData.sample2),
                          image: .constant(Image("mockupImage")),
                          didCloseFavProductDetail: .constant(false))
             .preferredColorScheme(.dark)

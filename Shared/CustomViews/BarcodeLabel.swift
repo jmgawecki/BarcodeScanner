@@ -11,7 +11,7 @@ struct BarcodeLabel: View {
     @Binding var item: ProductStored?
     
     var body: some View {
-        if ((item?.productName?.isEmpty) != nil) {
+        if ((item?.productName!) != "") {
             Label((item?.barcode)!, systemImage: "barcode.viewfinder")
                 .foregroundColor(.green)
                 .font(.title)

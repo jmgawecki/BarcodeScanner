@@ -12,6 +12,7 @@ struct ProductDetail: View {
     @Binding var selectedProduct: ProductStored?
     @Binding var image: Image?
     @Binding var fetchedProductFromJson: ProductStored?
+    @Binding var didScanFromCloud: Bool
     
     var body: some View {
         ZStack {
@@ -22,29 +23,24 @@ struct ProductDetail: View {
                 
                 ProductDetailImageView(image: $image)
                 
-                ProductLabel(item: $selectedProduct,
+                ProductNameLabel(item: $selectedProduct,
                              systemImageString: SystemImages.productsName)
                 
                 ProductBrandLabel(item: $selectedProduct)
                 
-                ProductLabel(item: $selectedProduct,
-                             systemImageString: SystemImages.productsCategory)
+                ProductCategoryLabel(item: $selectedProduct,
+                                     systemImageString: SystemImages.productsCategory)
                 
+                if didScanFromCloud == false {
+                    AddToFavoriteButton(fetchedProductFromJson: $fetchedProductFromJson,
+                                        selectedProduct: $selectedProduct)
+                }
                 
-                Button(action: {
-                    fetchedProductFromJson = ProductStored(barcode: selectedProduct!.barcode,
-                                                     productName: selectedProduct?.productName,
-                                                     category: selectedProduct?.category,
-                                                     brand: selectedProduct?.brand,
-                                                     image: selectedProduct?.image)
-                }, label: {
-                    Text("Add to favorite")
-                        .padding()
-                        .foregroundColor(.green)
-                       
-                })
                 Spacer().frame(minHeight: 10, maxHeight: 80)
             }
+        }
+        .onDisappear {
+            didScanFromCloud = false
         }
     }
 }
@@ -53,7 +49,7 @@ struct ProductDetail_Previews: PreviewProvider {
     static var previews: some View {
         ProductDetail(selectedProduct: .constant(MockData.sample2),
                       image: .constant(Image("mockupImage")),
-                      fetchedProductFromJson: .constant(MockData.sample2))
+                      fetchedProductFromJson: .constant(MockData.sample2), didScanFromCloud: .constant(false))
             .preferredColorScheme(.dark)
     }
 }
@@ -71,3 +67,23 @@ struct ProductDetail_Previews: PreviewProvider {
 
  Spacer(minLength: 30)*/
 
+
+struct AddToFavoriteButton: View {
+    @Binding var fetchedProductFromJson: ProductStored?
+    @Binding var selectedProduct: ProductStored?
+    
+    var body: some View {
+        Button(action: {
+            fetchedProductFromJson = ProductStored(barcode: selectedProduct!.barcode,
+                                                   productName: selectedProduct?.productName,
+                                                   category: selectedProduct?.category,
+                                                   brand: selectedProduct?.brand,
+                                                   image: selectedProduct?.image)
+        }, label: {
+            Text("Add to favorite")
+                .padding()
+                .foregroundColor(.green)
+            
+        })
+    }
+}

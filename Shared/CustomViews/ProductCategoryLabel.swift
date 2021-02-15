@@ -1,20 +1,20 @@
 //
-//  ProductLabel.swift
+//  ProductCategoryLabel.swift
 //  Barcode Scanner
 //
-//  Created by Jakub Gawecki on 11/02/2021.
+//  Created by Jakub Gawecki on 15/02/2021.
 //
 
 import SwiftUI
 
-struct ProductLabel: View {
+struct ProductCategoryLabel: View {
     @Binding var item: ProductStored?
     var systemImageString: String?
     
     var body: some View {
         HStack {
-            if ((item?.productName?.isEmpty) != nil) {
-                Label((item?.productName)!,
+            if ((item?.category!) != "") {
+                Label((item?.category)!,
                       systemImage: systemImageString ?? "xcross")
                     .font(.headline)
                     .padding()
@@ -30,8 +30,8 @@ struct ProductLabel: View {
     }
 }
 
-struct ProductLabel_Previews: PreviewProvider {
+struct ProductCategoryLabel_Previews: PreviewProvider {
     static var previews: some View {
-        ProductLabel(item: .constant(MockData.sample2))
+        ProductNameLabel(item: .constant(MockData.sample2))
     }
 }

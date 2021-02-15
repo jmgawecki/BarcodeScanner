@@ -82,6 +82,8 @@ final class ScannerViewModel: ObservableObject {
         }
     }
     
+    @Published var didScanFromCloud = false
+    
     
     // MARK: - Image related Publishers
     
@@ -123,13 +125,13 @@ final class ScannerViewModel: ObservableObject {
             case .success(let products):
                 var tempProducts: [ProductStored]?
                 tempProducts = products.filter({ $0.barcode == scannedCode})
-                print(tempProducts)
                 guard ((tempProducts?.isEmpty) == nil) else {
                     DispatchQueue.main.async {
                         self.selectedProduct = tempProducts?[0]
                         self.activeSheet = .detail
                     }
                     self.getProductImage(from: (tempProducts![0].image)!)
+                    didScanFromCloud = true
                     return
                 }
                 

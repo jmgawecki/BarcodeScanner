@@ -41,7 +41,7 @@ struct ScannerView: View {
                     case .detail:
                         ProductDetail(selectedProduct: $viewModel.selectedProduct,
                                       image: $viewModel.productImage,
-                                      fetchedProductFromJson: $viewModel.fetchedProductFromJson)
+                                      fetchedProductFromJson: $viewModel.fetchedProductFromJson, didScanFromCloud: $viewModel.didScanFromCloud)
                         
                     case .create:
                         CreateProductView(createdProductManually: $viewModel.createdProductManually,
@@ -67,14 +67,17 @@ struct ScannerView: View {
                                             viewModel.selectedFavorite = product
                                         }
                                 }
-                                .onDelete(perform: viewModel.deleteProduct(at:))
+                                .onDelete(perform: { indexSet in
+                                    viewModel.deleteProduct(at: indexSet)
+                                    viewModel.reloadProducts()
+                                })
                             }
                         }
                     }
                     .onAppear { viewModel.reloadProducts() }
                 }
                 .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
-                    FavProductDetail(item: $viewModel.selectedFavorite,
+                    FavProductDetail(selectedProduct: $viewModel.selectedFavorite,
                                      image: $viewModel.productImage,
                                      didCloseFavProductDetail: $viewModel.didCloseFavProductDetail)
                 })
