@@ -10,4 +10,8 @@ Technology used:
 - Integration with AWS Amplify, Data Store
 - Barcode APIs
 
-Development in progress. Will update video presenting the app shortly:)
+Development in progress. Logic tied up. Last stage - UI.
+Will update video presenting the app shortly:)
+
+Here are some screenshots of the app functionality:
+
