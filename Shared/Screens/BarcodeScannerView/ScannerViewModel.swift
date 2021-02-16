@@ -120,7 +120,8 @@ final class ScannerViewModel: ObservableObject {
     
     //MARK: - Data Store Functions
     func findProductInCloud() {
-        Amplify.DataStore.query(ProductStored.self) { (result) in
+        Amplify.DataStore.query(ProductStored.self) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let products):
                 var tempProducts: [ProductStored]?
