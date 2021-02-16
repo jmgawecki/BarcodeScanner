@@ -15,3 +15,18 @@ Will update video presenting the app shortly:)
 
 Here are some screenshots of the app functionality:
 
+Main view showing the list of products:
+
+<img src="https://user-images.githubusercontent.com/71930261/108132905-92d3ba80-70ab-11eb-8c07-c6dfaf68be4b.PNG" width="275">
+
+List's element showing product's details:
+
+<img src="https://user-images.githubusercontent.com/71930261/108132907-936c5100-70ab-11eb-8de0-7f95dcc0e6fd.PNG" width="275">
+
+View showing newly scanned product that was recognised:
+
+<img src="https://user-images.githubusercontent.com/71930261/108132900-91a28d80-70ab-11eb-82cd-64189b51469b.PNG" width="275">
+
+View after scanning a barcode that was not recognised:
+
+<img src="https://user-images.githubusercontent.com/71930261/108132908-9404e780-70ab-11eb-9f7b-4f8b67203b2f.PNG" width="275" >
