@@ -30,6 +30,7 @@
 		EF37ED0125D5CB80002E4EEC /* ProductBrandLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37ECFF25D5CB80002E4EEC /* ProductBrandLabel.swift */; };
 		EF37ED0525D5CC00002E4EEC /* BarcodeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37ED0425D5CC00002E4EEC /* BarcodeLabel.swift */; };
 		EF37ED0625D5CC00002E4EEC /* BarcodeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37ED0425D5CC00002E4EEC /* BarcodeLabel.swift */; };
+		EF54F71625DD539700FF3D9B /* Barcode_ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54F71525DD539700FF3D9B /* Barcode_ScannerTests.swift */; };
 		EF5EDBE125DB002600BA57E5 /* ProductCategoryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDBE025DB002600BA57E5 /* ProductCategoryLabel.swift */; };
 		EF5EDBE225DB002600BA57E5 /* ProductCategoryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDBE025DB002600BA57E5 /* ProductCategoryLabel.swift */; };
 		EF7D599A25CEEAD900B690D3 /* Barcode_ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D598725CEEAD900B690D3 /* Barcode_ScannerApp.swift */; };
@@ -56,6 +57,16 @@
 		F77F2D4006577F2F37C5E382 /* Pods_Barcode_Scanner__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3EC541E932D99664E6B337 /* Pods_Barcode_Scanner__iOS_.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EF54F71825DD539700FF3D9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF7D598225CEEAD900B690D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF7D598D25CEEAD900B690D3;
+			remoteInfo = "Barcode Scanner (iOS)";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		15ED7D1AE98B4642ACF5B948 /* Pods-Barcode Scanner (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barcode Scanner (iOS).release.xcconfig"; path = "Target Support Files/Pods-Barcode Scanner (iOS)/Pods-Barcode Scanner (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		3A5C811FCECA340B4B3707E8 /* Pods_Barcode_Scanner__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barcode_Scanner__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +88,9 @@
 		EF37ECFA25D5CB3B002E4EEC /* ProductDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailImageView.swift; sourceTree = "<group>"; };
 		EF37ECFF25D5CB80002E4EEC /* ProductBrandLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBrandLabel.swift; sourceTree = "<group>"; };
 		EF37ED0425D5CC00002E4EEC /* BarcodeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeLabel.swift; sourceTree = "<group>"; };
+		EF54F71325DD539700FF3D9B /* Barcode ScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Barcode ScannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF54F71525DD539700FF3D9B /* Barcode_ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode_ScannerTests.swift; sourceTree = "<group>"; };
+		EF54F71725DD539700FF3D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF5EDBE025DB002600BA57E5 /* ProductCategoryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryLabel.swift; sourceTree = "<group>"; };
 		EF7D598725CEEAD900B690D3 /* Barcode_ScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode_ScannerApp.swift; sourceTree = "<group>"; };
 		EF7D598825CEEAD900B690D3 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
@@ -98,6 +112,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF54F71025DD539700FF3D9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF7D598B25CEEAD900B690D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,6 +202,15 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		EF54F71425DD539700FF3D9B /* Barcode ScannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF54F71525DD539700FF3D9B /* Barcode_ScannerTests.swift */,
+				EF54F71725DD539700FF3D9B /* Info.plist */,
+			);
+			path = "Barcode ScannerTests";
+			sourceTree = "<group>";
+		};
 		EF7D598125CEEAD900B690D3 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +219,7 @@
 				EF7D598625CEEAD900B690D3 /* Shared */,
 				EF7D599025CEEAD900B690D3 /* iOS */,
 				EF7D599725CEEAD900B690D3 /* macOS */,
+				EF54F71425DD539700FF3D9B /* Barcode ScannerTests */,
 				EF7D598F25CEEAD900B690D3 /* Products */,
 				D13712B181E28FEFCFEAFF73 /* Pods */,
 				B822AB050C2BA8E0D39D87A3 /* Frameworks */,
@@ -217,6 +248,7 @@
 			children = (
 				EF7D598E25CEEAD900B690D3 /* Barcode Scanner.app */,
 				EF7D599625CEEAD900B690D3 /* Barcode Scanner.app */,
+				EF54F71325DD539700FF3D9B /* Barcode ScannerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +350,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF54F71225DD539700FF3D9B /* Barcode ScannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF54F71C25DD539700FF3D9B /* Build configuration list for PBXNativeTarget "Barcode ScannerTests" */;
+			buildPhases = (
+				EF54F70F25DD539700FF3D9B /* Sources */,
+				EF54F71025DD539700FF3D9B /* Frameworks */,
+				EF54F71125DD539700FF3D9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF54F71925DD539700FF3D9B /* PBXTargetDependency */,
+			);
+			name = "Barcode ScannerTests";
+			productName = "Barcode ScannerTests";
+			productReference = EF54F71325DD539700FF3D9B /* Barcode ScannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EF7D598D25CEEAD900B690D3 /* Barcode Scanner (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF7D59A225CEEAD900B690D3 /* Build configuration list for PBXNativeTarget "Barcode Scanner (iOS)" */;
@@ -365,6 +415,10 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					EF54F71225DD539700FF3D9B = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = EF7D598D25CEEAD900B690D3;
+					};
 					EF7D598D25CEEAD900B690D3 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -388,11 +442,19 @@
 			targets = (
 				EF7D598D25CEEAD900B690D3 /* Barcode Scanner (iOS) */,
 				EF7D599525CEEAD900B690D3 /* Barcode Scanner (macOS) */,
+				EF54F71225DD539700FF3D9B /* Barcode ScannerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF54F71125DD539700FF3D9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF7D598C25CEEAD900B690D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -496,6 +558,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EF54F70F25DD539700FF3D9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF54F71625DD539700FF3D9B /* Barcode_ScannerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF7D598A25CEEAD900B690D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,7 +622,60 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EF54F71925DD539700FF3D9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF7D598D25CEEAD900B690D3 /* Barcode Scanner (iOS) */;
+			targetProxy = EF54F71825DD539700FF3D9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		EF54F71A25DD539700FF3D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9HHDDYFD2W;
+				INFOPLIST_FILE = "Barcode ScannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "SillyGoose.Barcode-ScannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barcode Scanner.app/Barcode Scanner";
+			};
+			name = Debug;
+		};
+		EF54F71B25DD539700FF3D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9HHDDYFD2W;
+				INFOPLIST_FILE = "Barcode ScannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "SillyGoose.Barcode-ScannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barcode Scanner.app/Barcode Scanner";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		EF7D59A025CEEAD900B690D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -764,6 +887,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF54F71C25DD539700FF3D9B /* Build configuration list for PBXNativeTarget "Barcode ScannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF54F71A25DD539700FF3D9B /* Debug */,
+				EF54F71B25DD539700FF3D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EF7D598525CEEAD900B690D3 /* Build configuration list for PBXProject "Barcode Scanner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
