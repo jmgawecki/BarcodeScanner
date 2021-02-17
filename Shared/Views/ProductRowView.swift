@@ -14,9 +14,13 @@ struct ProductRowView: View {
     
     var body: some View {
         VStack {
-            Text(productItem.productName!)
-                .font(.headline)
-            if productItem.category != "" {
+            HStack {
+                Text(productItem.productName!)
+                    .font(.headline)
+                Spacer()
+            }
+            
+            if productItem.brand != "" {
                 HStack {
                     Text("From ")
                         .font(.subheadline)
@@ -25,6 +29,7 @@ struct ProductRowView: View {
                     Text(productItem.brand!)
                         .frame(alignment: .center)
                         .font(.headline)
+                    Spacer()
                 }
                 
             }
