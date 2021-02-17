@@ -10,14 +10,13 @@ import XCTest
 
 class Barcode_ScannerTests: XCTestCase {
     var urlTest: URLSession!
-
+    
     override func setUpWithError() throws {
         super.setUp()
         urlTest = URLSession(configuration: .default)
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         urlTest = nil
         super.tearDown()
         
@@ -33,9 +32,9 @@ class Barcode_ScannerTests: XCTestCase {
         
         
         // when
-        let dataTask = urlTest.dataTask(with: url!) { (data, response, error) in
-            statusCode = (response as? HTTPURLResponse)?.statusCode
-            responseError = error
+        let dataTask        = urlTest.dataTask(with: url!) { (data, response, error) in
+            statusCode      = (response as? HTTPURLResponse)?.statusCode
+            responseError   = error
             promise.fulfill()
         }
         dataTask.resume()
@@ -46,5 +45,5 @@ class Barcode_ScannerTests: XCTestCase {
         XCTAssertNil(responseError)
         XCTAssertEqual(statusCode, 200)
     }
-
+    
 }
