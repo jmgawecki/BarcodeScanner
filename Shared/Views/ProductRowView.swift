@@ -36,7 +36,7 @@ struct ProductRowView: View {
         }
         .frame(maxWidth: .infinity,
                minHeight: 60)
-        .cornerRadius(15)
+        .cornerRadius(0)
         
         
         
@@ -52,6 +52,6 @@ struct ProductRowView: View {
 struct ProductRowView_Previews: PreviewProvider {
     static var previews: some View {
         ProductRowView(productItem: MockData.sample2)
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }

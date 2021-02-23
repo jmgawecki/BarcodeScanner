@@ -56,19 +56,6 @@ struct ProductDetail_Previews: PreviewProvider {
     }
 }
 
-/*
- BarcodeLabel(item: $item)
- 
- ProductDetailImageView(image: $image)
- 
- ProductLabel(item: $item, systemImageString: SystemImages.productsName)
- 
- ProductBrandLabel(item: $item)
- 
- ProductLabel(item: $item, systemImageString: SystemImages.productsCategory)
-
- Spacer(minLength: 30)*/
-
 
 struct AddToFavoriteButton: View {
     @Binding var fetchedProductFromJson: ProductStored?
@@ -84,7 +71,7 @@ struct AddToFavoriteButton: View {
         }, label: {
             Text("Add to favorite")
                 .padding()
-                .foregroundColor(.green)
+                .background(Color.green)
             
         })
     }

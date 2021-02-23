@@ -32,6 +32,7 @@ struct ScannerView: View {
                     })
                 }
             }
+            .frame(maxWidth: .infinity)
             .listStyle(InsetGroupedListStyle())
             .onAppear { viewModel.reloadProducts() }
             .sheet(isPresented: $viewModel.isShowingFavDetail, content: {
@@ -39,13 +40,13 @@ struct ScannerView: View {
                                  image: $viewModel.productImage,
                                  didCloseFavProductDetail: $viewModel.didCloseFavProductDetail)
             })
-            
             .navigationTitle("Your products")
             
         }
             .tabItem {
                 Text("Your products")
                 Image(systemName: "star")
+                    
             }
             NavigationView {
                 VStack {
@@ -89,6 +90,7 @@ struct ScannerView: View {
             
             
         }
+        .accentColor(.green)
     }
 }
 
@@ -101,6 +103,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ScannerView()
             .preferredColorScheme(.light)
+            
             
             
             
